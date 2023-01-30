@@ -105,7 +105,7 @@ gulp.task('environment', function() {
 gulp.task('open', function() {
   var split_dir = path.parse(__dirname).dir
   var current_year = path.parse(split_dir).base
-  var localHost = 'http://localhost:8080/selfDevelopment/' + path.parse(__dirname).base
+  var localHost = 'http://localhost:80/selfDevelopment/' + path.parse(__dirname).base
   gulp.src('./index.html').pipe(open({
     uri: localHost
   }))

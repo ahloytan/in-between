@@ -1,4 +1,5 @@
-var allCards = {"A": [1, 4], "2": [2, 4], "3": [3, 4], "4": [4, 4], "5": [5, 4], "6": [6, 4], "7": [7, 4], "8": [8, 4], "9": [9, 4], "10": [10, 4], "J": [11, 4], "Q": [12, 4], "K": [13, 4]};
+var v = 4;
+var allCards = {"A": [1, v], "2": [2, v], "3": [3, v], "4": [4, v], "5": [5, v], "6": [6, v], "7": [7, v], "8": [8, v], "9": [9, v], "10": [10, v], "J": [11, v], "Q": [12, v], "K": [13, v]};
 var zeClone = $.extend(true, {}, allCards) //https://stackoverflow.com/questions/5364650/cloning-an-object-in-javascript
 var totalCards = 52;
 var fCard;
@@ -84,8 +85,8 @@ $(document).ready(function() {
       var sameChance = (sameCards / (totalCards)) * 100;
       var loseChance = 100 - winChance;
 
-      $("#wStats").text("W: " + winChance.toFixed(1) + "% ");
-      $("#lStats").text("| L: " + loseChance.toFixed(1) + "% | ");
+      $("#wStats").text("Win: " + winChance.toFixed(1) + "% ");
+      $("#lStats").text("| Lose: " + loseChance.toFixed(1) + "% | ");
       $("#sStats").text("Same: " + sameChance.toFixed(1) + "%");
 
     } else {
