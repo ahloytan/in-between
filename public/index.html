@@ -1,46 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<link rel="stylesheet" type="text/css" href="app/styles/css/app.css" />
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Cache-control" content="public">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>In-Between</title>
-  <link rel="preload" href="app/styles/fonts/Montserrat-Light.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-  <link rel="preload" href="app/styles/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-  <link rel="preload" href="app/styles/fonts/Montserrat-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-</head>
-
-<body>
-  <div id="root">
-      <div id="main">
-        <div class="holder" id="holder">
-          <stats-box v-for="item in statsBox" :id="item.boxId" :key="item.boxId"></stats-box>
-          <div class="group header">CALCULATOR</div>
-
-          <div id="card1Box" class="group">
-            <label for="fCard" class="label">1st Card:</label>
-            <!-- html files always kebab case-->
-            <card c-tag="cardOpt" i-tag="c1" invi="invi"></card>
-          </div>
-
-          <div id="card2Box" class="group">
-            <label for="lCard" class="label">2nd Card:</label>
-            <card c-tag="cardOpt" i-tag="c2" invi="invi"></card>
-            <invi id="c2Invi" class="invi"></invi>
-          </div>
-
-          <div id="card3Box" class="group showOrNot">
-            <label for="lCard" class="label">Opened Card:</label>
-            <card c-tag="cardOpt" i-tag="c3" invi="invi"></card>
-          </div>
-
-          <div id="oStats">&nbsp;</div>
-        </div>
-      </div>
-  </div>
-</body>
-<script src="app/scripts/compiledJs/bundle.js" charset="utf-8"></script>
-
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico?v=2">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>
+<style>
+body,
+html {
+  height: 100%;
+  margin: 0 !important;
+}
+
+#app {
+  height: 100%;
+}
+
+</style>
