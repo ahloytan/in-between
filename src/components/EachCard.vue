@@ -1,6 +1,6 @@
 <template>
   <div class="cardHolder">
-    <div v-for="(value, key) in this.$store.state.allCards" class="cardOpt" :key="key">
+    <div v-for="(value, key) in this.allCards" class="cardOpt" :key="key">
       <div :class="iTag" @click="value[1] > 0 ? decreaseCount(key, value) : ''">
         {{ value[0] }}
       </div>
@@ -8,15 +8,21 @@
   </div> 
 </template>
 <script>
+import { mapMutations, mapGetters } from 'vuex';
+
 export default {
   name: 'EachCard',
   props: ['iTag'],
+  computed: {
+    ...mapGetters(['allCards', 'totalCards'])
+  },
   methods:{
+    ...mapMutations(['decrease', 'resetState']),
     decreaseCount(key, values){
         let s = this.$store.state;
-        this.$store.commit('decrease', key);
+        this.decrease(key);
 
-        if (s.totalCards == 0) {
+        if (this.totalCards == 0) {
           this.resetGame();
           return;
         }
@@ -69,9 +75,9 @@ export default {
       
     },
     resetGame(){
-      console.log("empty");
       let s = this.$store.state;
-      this.$store.commit('resetState');
+      console.log("empty");
+      this.resetState();
       s.showCard1 = !s.showCard1;
       s.statsBox.wStats = "";   
       s.statsBox.lStats = "";       

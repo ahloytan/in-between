@@ -1,7 +1,7 @@
 <template>
   <div id="root">
       <div id="main">
-        <div v-if="this.$store.state.settingsPage" id="settings" class="bgSea">
+        <div v-if="settingsPage" id="settings" class="bgSea">
           <div class="group header">SETTINGS</div>
           <p class="rule">Select the <b>minimum no. of cards</b> needed in-between to start playing. For example, 6 & K = 7, 8, 9, 10, J, Q <br> (6 cards in-between)</p>
           <div v-for="(value, key) in minCards" class="cardOpt" :key="key" @click="numCardsSettings(key)">
@@ -10,23 +10,23 @@
         </div>
         <div v-else>
           <div class="bgSea">
-            <div v-for="(value, key) in this.$store.state.statsBox" :id="key" :key="key" class="stats">{{ value }}</div>
+            <div v-for="(value, key) in this.statsBox" :id="key" :key="key" class="stats">{{ value }}</div>
           </div>
           <div id="holder" class="bgSea">
             <div class="group header">CALCULATOR</div>
 
-            <div v-if="this.$store.state.showCard1" id="card1Box" class="group">
+            <div v-if="this.showCard1" id="card1Box" class="group">
               <label for="fCard" class="label">1st Card:</label>
               <EachCard i-tag="c1"></EachCard>
             </div>
 
-            <div v-if="!this.$store.state.showCard1" id="card2Box" class="group">
+            <div v-if="!this.showCard1" id="card2Box" class="group">
               <label for="lCard" class="label">2nd Card:</label>
               <EachCard i-tag="c2"></EachCard>
-              <div v-if="this.$store.state.playable" id="c2Invi" class="invi"></div>
+              <div v-if="this.playable" id="c2Invi" class="invi"></div>
             </div>
 
-            <div v-if="!this.$store.state.showCard1 && this.$store.state.playable" id="card3Box" class="group">
+            <div v-if="!this.showCard1 && this.playable" id="card3Box" class="group">
               <label for="lCard" class="label">Opened Card:</label>
               <EachCard i-tag="c3"></EachCard>
             </div>
@@ -34,7 +34,7 @@
 
           <div id="oStatsHolder" class="bgSea">
             <div id="oStats">
-              <div class="oCardStats" v-for="(value, key) in this.$store.state.allCards" :key="key">
+              <div class="oCardStats" v-for="(value, key) in this.allCards" :key="key">
                 [{{ value[0] }}: {{ value[1] }}]&nbsp;
               </div>
             </div>
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 import EachCard from './components/EachCard.vue';
 export default {
   name: 'App',
@@ -52,15 +53,12 @@ export default {
     EachCard
   },
   methods: {
-    numCardsSettings(val){
-      let s = this.$store.state;
-      s.minCards = val;
-      s.settingsPage = false;
-    }
+    ...mapMutations(['numCardsSettings'])
   },
   computed: {
-    minCards: function() {
-      return Object.keys(this.$store.state.allCards).filter((i) => i <= 6)
+    ...mapGetters(['allCards', 'playable', 'showCard1', 'statsBox', 'settingsPage']),
+    minCards() {
+      return Object.keys(this.allCards).filter((i) => i <= 9)
     },
   }
 }
@@ -81,8 +79,12 @@ export default {
   src: url('./assets/fonts/Montserrat-Regular.ttf');
 }
 
+body {
+  margin: 0;
+}
+
 #root {
-  height: 100%;
+  height: 100vh;
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
